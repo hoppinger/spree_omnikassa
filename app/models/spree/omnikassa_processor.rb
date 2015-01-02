@@ -25,7 +25,8 @@ module Spree
         normalReturnUrl: normal_return_url,
         automaticResponseUrl: automatic_response_url,
         transactionReference: transaction_reference,
-        keyVersion: key_version }
+        keyVersion: key_version,
+        customerLanguage: current_language.nil? ? '' : current_language }
     end
 
     def money
@@ -75,6 +76,10 @@ module Spree
 
     def self.secret
       Spree::Config[:omnikassa_secret_key]
+    end
+
+    def current_language
+      I18n.locale[0..1].upcase if ['CS', 'CY', 'DE', 'EN', 'ES', 'FR', 'NL', 'SK'].include?(I18n.locale[0..1].upcase)
     end
   end
 end
