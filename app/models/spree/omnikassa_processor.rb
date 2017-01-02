@@ -26,7 +26,8 @@ module Spree
         normalReturnUrl: normal_return_url,
         automaticResponseUrl: automatic_response_url,
         transactionReference: transaction_reference,
-        keyVersion: key_version }
+        keyVersion: key_version,
+        customerLanguage: customer_language }
     end
 
     def money
@@ -80,6 +81,10 @@ module Spree
 
     def order_id
       @payment.order.number
+    end
+
+    def customer_language
+      I18n.locale[0..1].upcase
     end
   end
 end
